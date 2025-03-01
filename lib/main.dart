@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/core/presentation/messenger_app.dart';
+import 'package:messenger/core/presentation/view/messenger_app.dart';
 
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_fonts.dart';
