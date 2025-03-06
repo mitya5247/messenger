@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/chat/presentation/view/chat_screen.dart';
-import 'package:messenger/chat_list/domain/entities/chat_entity.dart';
+import 'package:messenger/chat_list/data/models/user_model.dart';
 import 'package:messenger/core/presentation/widget/custom_app_bar.dart';
 
 
@@ -12,20 +12,34 @@ class ChatListScreen extends StatefulWidget {
 }
 
 class ChatListState extends State<ChatListScreen> {
-  List<ChatEntity> chatList = [
-    ChatEntity(
-      id: 1, 
-      participants: List.empty(), 
-    ),
-    ChatEntity(
-      id: 2, 
-      participants: List.empty(), 
-    ),
-    ChatEntity(
-      id: 3, 
-      participants: List.empty(), 
-    ),
+  List<UserModel> chatList = [
+    UserModel(
+      photo: Image.asset("1"), 
+      firstName: "Николай 1", 
+      secondName: "Николаевич 1",
+      ),
+      UserModel(
+        photo: Image.asset("2"), 
+        firstName: "Николай 2", 
+        secondName: "Николаевич 2",
+      ),
+      UserModel(
+        photo: Image.asset("3"), 
+        firstName: "Николай3 ", 
+        secondName: "Николаевич 3",
+      ),
+      UserModel(
+        photo: Image.asset("4"), 
+        firstName: "Николай 4", 
+        secondName: "Николаевич 4",
+      ),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // логика по выгрузке списка чатов из БД 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +50,19 @@ class ChatListState extends State<ChatListScreen> {
           itemCount: chatList.length,
           itemBuilder: (context, i) =>
           ListTile(
-            title: Text(chatList[i].id.toString()),
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatScreen())),
+            leading: Container(
+              height: 50,
+              width: 50,
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              child: Center(child: Text(chatList[i].firstName.substring(0, 1) + chatList[i].secondName.substring(0, 1)),),
+            ),
+            trailing: Text(chatList[i].status = "В сети"),
+            title: Text("${chatList[i].firstName} ${chatList[i].secondName}"),
+            subtitle: Text(chatList[i].firstName.toString()),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen(contact: UserModel(photo: null, firstName: chatList[i].firstName, secondName: chatList[i].secondName),))),
           ),
           separatorBuilder: (context, index) {
             return const Divider(color: Color(0xffEDF2F6));

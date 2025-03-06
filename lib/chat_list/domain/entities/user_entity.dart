@@ -1,7 +1,15 @@
-class UserEntity {
-  final int id;
+import 'package:flutter/material.dart';
+
+abstract class UserEntity {
+  late final int id;
+  final Image? photo;
   final String firstName;
   final String secondName;
+  late final String status;
 
-  const UserEntity({required this.id, required this.firstName, required this.secondName});
+  UserEntity({
+    required this.photo, 
+    required this.firstName, 
+    required this.secondName
+    });
 }

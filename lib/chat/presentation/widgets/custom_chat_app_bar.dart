@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/chat_list/data/models/user_model.dart';
 
 class CustomChatAppBar extends StatelessWidget implements PreferredSizeWidget {
-  CustomChatAppBar({super.key, required this.child  ,this.height = kToolbarHeight});
+  const CustomChatAppBar({super.key, required this.child  ,this.height = kToolbarHeight});
 
   final double height;
-  Widget child;
+  final UserModel child;
 
 
   
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Icon(Icons.arrow_back_ios), 
-      ],
+    return AppBar(
+      leading: BackButton(
+        onPressed: () => Navigator.pop(context, false),
+      ),
+      title: Column(
+          children: [
+            Text("${child.firstName} ${child.secondName}"),
+            Text(child.secondName),
+          ]
+      ),
     );
   }
   
